@@ -39,14 +39,20 @@ class MediaSpider(scrapy.Spider):
 
         if response.status == 200:
             genres = response.css('.genre-list::text').extract_first().strip('')
-            yield {
-                'title': response.css('h1.show-title::text').extract_first(),
-                'synopsis': response.css('p.synopsis::text').extract_first(),
-                'img_url': response.css('img.title-hero-image::attr("src")').extract_first(),
-                'isFilm': genres.lower().find('film') > -1,
-                'genres': genres.split(','),
-                'apps': ["Netflix"],
-            }
+
+            if response.css('h1.show-title::text').extract_first() not in self.already_scraped:
+                yield {
+                    'title': response.css('h1.show-title::text').extract_first(),
+                    'synopsis': response.css('p.synopsis::text').extract_first(),
+                    'img_url': response.css('img.title-hero-image::attr("src")').extract_first(),
+                    'isFilm': genres.lower().find('film') > -1,
+                    'genres': genres.split(','),
+                    'apps': ["Netflix"],
+                }
+
+            self.already_scraped.append(response.css('h1.show-title::text').extract_first())
+
             self.starting_title_n += 1
-            next_page = 'https://netflix.com/title/' + str(self.starting_title_n+1)
+
+            next_page = 'https://netflix.com/title/' + str(self.starting_title_n)
             yield response.follow(next_page, callback=self.parse)
