@@ -38,15 +38,15 @@ class MediaSpider(scrapy.Spider):
                 yield response.follow(next_page, callback=self.parse)
 
         if response.status == 200:
-            genres = response.css('.genre-list::text').extract_first().strip('')
+            genres = response.css('.genre-list::text').extract_first()
 
             if response.css('h1.show-title::text').extract_first() not in self.already_scraped:
                 yield {
                     'title': response.css('h1.show-title::text').extract_first(),
                     'synopsis': response.css('p.synopsis::text').extract_first(),
                     'img_url': response.css('img.title-hero-image::attr("src")').extract_first(),
-                    'isFilm': genres.lower().find('film') > -1,
-                    'genres': genres.split(','),
+                    'isFilm': genres.lower().find('film') > -1 if genres else True,
+                    'genres': genres.strip('').split(',') if genres else [],
                     'apps': ["Netflix"],
                 }
 
