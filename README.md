@@ -7,7 +7,8 @@ This is one of the many scrapers that will feed the <a href="https://github.com/
 ## Table of Contents
 1. [Challenges](#challenges)
 2. [What have I learned so far?](#what-have-i-learned-so-far)
-2. [What are the next steps?](#what-are-the-next-steps)
+3. [What are the next steps?](#what-are-the-next-steps)
+4. [Setup](#setup)
 
 ## Challenges
 
@@ -33,3 +34,34 @@ The same title can be accessed through different but very similar URLs, so initi
 * Review alternative approaches to site crawling to improve scraping efficiency
 * Setup iterator function to map over the media JSON and post data to the Laravel API
 * Build reporting system to handle errors and missing data
+
+## Setup
+
+You will need to have both Python's package manager <a href="https://pip.pypa.io/en/stable/installing/">pip</a> and <a href="https://doc.scrapy.org/en/latest/intro/install.html">virtualenv</a> installed.
+
+```
+mkdir nf-scraper && cd nf-scraper
+```
+
+Creates the virtual environment where Scrapy can operate.
+```
+virtualenv ENV && cd ENV
+```
+
+```
+git clone git@github.com:KyeBuff/netflix-scraper.git
+```
+
+```
+pip install scrapy
+```
+
+```
+source bin/activate
+```
+
+Then you can run the scraper using:
+
+```
+cd netflix-scraper/nfScraper/ && scrapy crawl -o media.json media
+```
