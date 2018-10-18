@@ -1,8 +1,8 @@
 # Netflix Web Scraper
 
-Built using Python and Scrapy, I followed along with some of the Scrapy docs initially and since then I've just been trying things out. Scrapy has made scraping so accessible, the ability to use CSS selectors to grab data is really useful.
-
 This is one of the many scrapers that will feed the <a href="https://github.com/KyeBuff/flick-api">Flick API</a>.
+
+Built using Python and Scrapy, I followed along with some of the Scrapy docs initially and since then I've just been trying things out. Scrapy has made scraping so accessible, the ability to use CSS selectors to grab data is really useful.
 
 ## Table of Contents
 1. [Challenges](#challenges)
@@ -23,7 +23,7 @@ The same title can be accessed through different but very similar URLs, so initi
 ## What have I learned so far?
 
 * How to build a web scraper
-* How to handle redirects (301s)
+* How to handle redirects and 404s
 * How to add delays between requests
 * How to rotate the user-agent
 * How to handle multiple 200s for the same title
